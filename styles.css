@@ -1,0 +1,40 @@
+/* --- SHARED STYLES (Jack's CSS) --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* --- ABOUT PAGE STYLES (Liam's CSS) --- */
+
+/* Stylized Student IDs (Requirement) */
+.id-style {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* Table styling for Fun Facts */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Hover effect (Requirement) */
+tr:hover {
+    background-color: #f1f8e9;
+}
+
+/* Figure styling (Requirement) */
+.team-border {
+    border: 5px solid #7ec580;
+    padding: 10px;
+    display: inline-block;
+}
