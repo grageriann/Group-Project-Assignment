@@ -1,11 +1,40 @@
-/* --- SHARED STYLES (Jack's CSS) --- */
+/* --- SHARED STYLES (Jack & Liam) --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
     line-height: 1.6;
+    color: #333;
 }
 
-/* --- ABOUT PAGE STYLES (Liam's CSS) --- */
+/* Common Navigation Styling (Requirement) */
+nav ul {
+    list-style-type: none;
+    background-color: #2e7d32;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Background Graphic for Index Page (Requirement) */
+#index-body {
+    background-image: url('energy-bg.jpg'); /* Ensure this image exists */
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* --- ABOUT PAGE STYLES (Liam) --- */
 
 /* Stylized Student IDs (Requirement) */
 .id-style {
@@ -19,17 +48,23 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #fff;
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
+}
+
+th {
+    background-color: #f1f8e9;
 }
 
 /* Hover effect (Requirement) */
 tr:hover {
-    background-color: #f1f8e9;
+    background-color: #e8f5e9;
+    transition: 0.3s;
 }
 
 /* Figure styling (Requirement) */
@@ -37,4 +72,93 @@ tr:hover {
     border: 5px solid #7ec580;
     padding: 10px;
     display: inline-block;
+    background-color: #f9f9f9;
+}
+
+/* --- APPLY PAGE STYLES (Liam's Form Layout) --- */
+
+/* Form layout using CSS Grid (Requirement) */
+form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+fieldset {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    border: 2px solid #2e7d32;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #2e7d32;
+}
+
+label {
+    align-self: center;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+input[type="date"], 
+select, 
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    grid-column: span 2;
+    padding: 15px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+input[type="submit"]:hover {
+    background-color: #1b5e20;
+}
+
+/* --- JOBS PAGE STYLES (Jack) --- */
+aside {
+    float: right;
+    width: 25%;
+    margin-left: 15px;
+    padding: 10px;
+    border: 2px solid #2e7d32;
+    background-color: #f1f8e9;
+}
+
+/* --- RESPONSIVE DESIGN (Requirement) --- */
+@media (max-width: 768px) {
+    form, fieldset {
+        grid-template-columns: 1fr; /* Stack labels and inputs on mobile */
+    }
+    
+    fieldset {
+        grid-column: span 1;
+    }
+    
+    aside {
+        width: 100%;
+        float: none;
+        margin-left: 0;
+    }
 }
