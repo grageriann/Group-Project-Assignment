@@ -1,17 +1,42 @@
-/* --- SHARED STYLES (Jack & Liam) --- */
+/* PROJECT: G06 Creative Digital Media Agency 
+   FILE: styles.css
+   AUTHORS: Jack Stremski & Liam White
+   DESCRIPTION: Main external stylesheet for the recruitment website.
+*/
+
+/* --- Root Variables for Brand Consistency --- */
+:root {
+    --primary-blue: #1a73e8;
+    --dark-grey: #202124;
+    --light-grey: #f8f9fa;
+    --text-color: #3c4043;
+    --white: #ffffff;
+    --hover-blue: #e8f0fe;
+}
+
+/* --- Global Elements --- */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-color);
 }
 
-/* Common Navigation Styling (Requirement) */
+/* --- Accessibility: Focus States --- */
+a:focus, 
+input:focus, 
+select:focus, 
+textarea:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+/* --- Common Navigation Menu --- */
 nav ul {
     list-style-type: none;
-    background-color: #2e7d32;
-    padding: 10px;
+    background-color: var(--dark-grey);
+    padding: 15px;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -22,143 +47,201 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
 
-/* Background Graphic for Index Page (Requirement) */
+nav ul li a:hover {
+    color: var(--primary-blue);
+}
+
+/* --- Index Page: Background Graphic --- */
 #index-body {
-    background-image: url('energy-bg.jpg'); /* Ensure this image exists */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                      url('agency-hero.jpg');
     background-size: cover;
+    background-position: center;
     background-attachment: fixed;
 }
 
-/* --- ABOUT PAGE STYLES (Liam) --- */
-
-/* Stylized Student IDs (Requirement) */
-.id-style {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    color: #2e7d32;
+/* --- Jobs Page: Specific Requirements --- */
+aside {
+    float: right;
+    width: 25%;
+    margin-left: 15px;
+    padding: 20px;
+    border: 2px solid var(--primary-blue);
+    background-color: var(--hover-blue);
+    border-radius: 8px;
+    box-sizing: border-box;
 }
 
-/* Table styling for Fun Facts */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
+/* Clearfix for Main content when Aside is floated */
+main::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #f1f8e9;
-}
-
-/* Hover effect (Requirement) */
-tr:hover {
-    background-color: #e8f5e9;
-    transition: 0.3s;
-}
-
-/* Figure styling (Requirement) */
-.team-border {
-    border: 5px solid #7ec580;
-    padding: 10px;
-    display: inline-block;
-    background-color: #f9f9f9;
-}
-
-/* --- APPLY PAGE STYLES (Liam's Form Layout) --- */
-
-/* Form layout using CSS Grid (Requirement) */
+/* --- Apply Page: Form Grid Layout --- */
 form {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 15px;
+    gap: 20px;
     max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--light-grey);
+    border-radius: 10px;
 }
 
 fieldset {
     grid-column: span 2;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 10px;
-    border: 2px solid #2e7d32;
+    gap: 15px;
+    border: 1px solid #dadce0;
     padding: 20px;
-    margin-bottom: 20px;
     border-radius: 8px;
+    background-color: var(--white);
 }
 
 legend {
     font-weight: bold;
+    color: var(--primary-blue);
     padding: 0 10px;
-    color: #2e7d32;
+    font-size: 1.1rem;
 }
 
 label {
     align-self: center;
-    font-weight: bold;
+    font-weight: 600;
 }
 
-input[type="text"], 
-input[type="email"], 
-input[type="tel"], 
-input[type="date"], 
-select, 
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
 textarea {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 input[type="submit"] {
     grid-column: span 2;
     padding: 15px;
-    background-color: #2e7d32;
+    background-color: var(--primary-blue);
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 input[type="submit"]:hover {
-    background-color: #1b5e20;
+    background-color: #1557b0;
 }
 
-/* --- JOBS PAGE STYLES (Jack) --- */
-aside {
-    float: right;
-    width: 25%;
-    margin-left: 15px;
+/* --- About Page: Specific Requirements --- */
+
+/* Styled Student IDs */
+.id-style {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: var(--primary-blue);
+    background-color: #eeeeee;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* Bordered Figure */
+.team-border {
+    border: 10px solid var(--light-grey);
     padding: 10px;
-    border: 2px solid #2e7d32;
-    background-color: #f1f8e9;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* --- RESPONSIVE DESIGN (Requirement) --- */
+/* Styled Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    border-bottom: 1px solid #eeeeee;
+    padding: 12px;
+}
+
+/* Hover Effect for Table Rows */
+tr:hover {
+    background-color: var(--hover-blue);
+    transition: background-color 0.2s ease;
+}
+
+/* --- Responsive Design (Media Queries) --- */
 @media (max-width: 768px) {
-    form, fieldset {
-        grid-template-columns: 1fr; /* Stack labels and inputs on mobile */
+    /* Stack form into a single column */
+    form, 
+    fieldset {
+        grid-template-columns: 1fr;
     }
-    
+
     fieldset {
         grid-column: span 1;
     }
-    
+
+    /* Stack Aside on mobile */
     aside {
         width: 100%;
         float: none;
         margin-left: 0;
+        margin-bottom: 20px;
     }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--dark-grey);
+    color: var(--white);
+    text-align: center;
+    padding: 30px 10px;
+    margin-top: 50px;
+}
+
+footer a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
