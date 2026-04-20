@@ -4,7 +4,7 @@
    DESCRIPTION: Main external stylesheet for the recruitment website.
 */
 
-/* --- Root Variables for Brand Consistency --- */
+/*Root Variables for Brand Consistency*/
 :root {
     --primary-blue: #1a73e8;
     --dark-grey: #202124;
@@ -14,7 +14,7 @@
     --hover-blue: #e8f0fe;
 }
 
-/* --- Global Elements --- */
+/*  Global Elements  */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -29,7 +29,7 @@ h2 {
     padding-bottom: 5px;
   }
 
-/* --- Accessibility: Focus States --- */
+/*  Accessibility: Focus States */
 a:focus, 
 input:focus, 
 select:focus, 
@@ -38,7 +38,7 @@ textarea:focus {
     outline-offset: 2px;
 }
 
-/* --- Common Navigation Menu --- */
+/*  Common Navigation Menu  */
 nav ul {
     list-style-type: none;
     background-color: var(--dark-grey);
@@ -65,7 +65,7 @@ nav ul li a:hover {
     color: var(--primary-blue);
 }
 
-/* --- Index Page: Background Graphic --- */
+/*  Index Page: Background Graphic  */
 #index-body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.6)), 
                       url('agency-hero.jpg');
@@ -74,7 +74,7 @@ nav ul li a:hover {
     background-attachment: fixed;
 }
 
-/* --- Jobs Page: Specific Requirements --- */
+/*  Jobs Page: Specific Requirements  */
 aside {
     float: right;
     width: 25%;
@@ -93,7 +93,7 @@ main::after {
     clear: both;
 }
 
-/* --- Apply Page: Form Grid Layout --- */
+/*  Apply Page: Form Grid Layout  */
 form {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -158,10 +158,10 @@ input[type="submit"]:hover {
     background-color: #1557b0;
 }
 
-/* --- About Page: Specific Requirements --- */
+/*  About Page: Specific Requirements  */
 
 /* Styled Student IDs */
-/* Styling for Student IDs to meet rubric requirements */
+/* Styling for Student ids to meet rubric requirements */
 .id-style {
     font-family: 'Courier New', Courier, monospace; /* Distinct font */
     font-weight: bold;
@@ -202,8 +202,10 @@ tr:hover {
     transition: background-color 0.2s ease;
 }
 
-/* --- Responsive Design (Media Queries) --- */
-@media (max-width: 768px) {
+/*  Responsive Design (Media Queries)  */
+@media (max-width: 768px) { 
+    /* a check on the width of the device to determine
+    what style it should use.  */
     /* Stack form into a single column */
     form, 
     fieldset {
@@ -232,7 +234,7 @@ tr:hover {
     }
 }
 
-/* --- Footer --- */
+/*  Footer  */
 footer {
     background-color: var(--dark-grey);
     color: var(--white);
@@ -251,7 +253,7 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* --- Index Page Extras --- */
+/* Index Page Extras */
 
 .hero-text {
     color: var(--white);
