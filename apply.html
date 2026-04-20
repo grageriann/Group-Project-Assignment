@@ -6,6 +6,7 @@
     <title>Join the Team | G06 Agency</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
+      /* Required Embedded CSS example */
       legend {
         font-size: 1.2rem;
         color: #1a73e8;
@@ -27,6 +28,7 @@
 
     <main>
       <h1 style="text-align: center">Application for Creative Roles</h1>
+
       <form
         action="https://mercury.swin.edu.au/it000000/formtest.php"
         method="post"
@@ -40,7 +42,7 @@
             name="job_ref"
             pattern="[A-Za-z0-9]{5}"
             required
-            title="5 alphanumeric characters"
+            title="Exactly 5 alphanumeric characters"
           />
         </fieldset>
 
@@ -69,17 +71,19 @@
           <label for="dob">Date of Birth:</label>
           <input type="date" id="dob" name="dob" required />
 
-          <p>Gender Identity:</p>
-          <label
-            ><input type="radio" name="gender" value="male" required />
-            Male</label
-          >
-          <label
-            ><input type="radio" name="gender" value="female" /> Female</label
-          >
-          <label
-            ><input type="radio" name="gender" value="other" /> Other</label
-          >
+          <fieldset>
+            <legend>Gender Identity</legend>
+            <label
+              ><input type="radio" name="gender" value="male" required />
+              Male</label
+            >
+            <label
+              ><input type="radio" name="gender" value="female" /> Female</label
+            >
+            <label
+              ><input type="radio" name="gender" value="other" /> Other</label
+            >
+          </fieldset>
         </fieldset>
 
         <fieldset>
@@ -122,11 +126,18 @@
             name="postcode"
             pattern="\d{4}"
             required
-            title="4 digits"
+            title="Exactly 4 digits"
           />
 
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title="Please enter a valid email address (e.g. name@domain.com)"
+          />
 
           <label for="phone">Phone:</label>
           <input
@@ -135,14 +146,15 @@
             name="phone"
             pattern="\d{8,12}"
             required
-            title="8-12 digits"
+            title="8–12 digits"
           />
         </fieldset>
 
         <fieldset>
           <legend>Technical Expertise</legend>
+          <p>Select your skills (at least one required):</p>
           <label
-            ><input type="checkbox" name="skills[]" value="HTML" />
+            ><input type="checkbox" name="skills[]" value="HTML" required />
             HTML/CSS</label
           >
           <label
@@ -174,5 +186,14 @@
         />
       </form>
     </main>
+
+    <footer>
+      <p>
+        &copy; 2026 G06 Creative Agency |
+        <a href="https://student-team-fnet57yj.atlassian.net/jira/software/projects/KAN/boards/2?jql=">Jira</a> |
+        <a href="https://github.com/grageriann/Group-Project-Assignment">GitHub</a> |
+        <a href="mailto:info@g06agency.com">info@g06agency.com</a>
+      </p>
+    </footer>
   </body>
 </html>

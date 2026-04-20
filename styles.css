@@ -155,13 +155,12 @@ input[type="submit"]:hover {
 /* --- About Page: Specific Requirements --- */
 
 /* Styled Student IDs */
+/* Styling for Student IDs to meet rubric requirements */
 .id-style {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace; /* Distinct font */
     font-weight: bold;
-    color: var(--primary-blue);
-    background-color: #eeeeee;
-    padding: 2px 5px;
-    border-radius: 3px;
+    color: #d93025; /* A distinct color like Google-red or dark red */
+    letter-spacing: 1px;
 }
 
 /* Bordered Figure */
