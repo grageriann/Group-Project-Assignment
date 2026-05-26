@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
+    header("Location: login.php");
+    exit;
+}
 require_once "settings.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -24,8 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   }
 }
 
-$query = "SELECT * FROM eoi ORDER BY DateSubmitted DESC";
-$result = mysqli_query($conn, $query);
+$search_job  = isset($_GET["search_job"]) ? trim($_GET["search_job"]) : "";
+$search_name = isset($_GET["search_name"]) ? trim($_GET["search_name"]) : "";
+
+$query = "SELECT * FROM eoi WHERE 1=1";
+$params = [];
+$types = "";
+
+if ($search_job !== "") {
+    $query .= " AND JobReferenceNumber = ?";
+    $params[] = $search_job;
+    $types .= "s";
+}
+
+if ($search_name !== "") {
+    $query .= " AND (FirstName LIKE ? OR LastName LIKE ?)";
+    $wildcard_name = "%" . $search_name . "%";
+    $params[] = $wildcard_name;
+    $params[] = $wildcard_name;
+    $types .= "ss";
+}
+
+$query .= " ORDER BY DateSubmitted DESC";
+
+$stmt = mysqli_prepare($conn, $query);
+if (!empty($params)) {
+    mysqli_stmt_bind_param($stmt, $types, ...$params);
+}
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 ?>
 
 <!doctype html>
@@ -52,6 +84,23 @@ $result = mysqli_query($conn, $query);
     <main>
       <h1>Manage Job Applications</h1>
 
+      <section style="background: #f4f4f4; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+        <form method="get" action="manage.php" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
+          <div>
+            <label for="search_job" style="display: block; font-weight: bold; margin-bottom: 5px;">Job Ref:</label>
+            <input type="text" id="search_job" name="search_job" value="<?php echo htmlspecialchars($search_job); ?>" style="padding: 6px;">
+          </div>
+          <div>
+            <label for="search_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Applicant Name:</label>
+            <input type="text" id="search_name" name="search_name" value="<?php echo htmlspecialchars($search_name); ?>" placeholder="First or last name..." style="padding: 6px;">
+          </div>
+          <div>
+            <button type="submit" style="padding: 6px 12px; cursor: pointer;">Filter</button>
+            <a href="manage.php" style="padding: 6px 12px; background: #ddd; color: black; text-decoration: none; border-radius: 3px; margin-left: 5px; font-size: 0.9rem;">Reset</a>
+          </div>
+        </form>
+      </section>
+
       <table>
         <thead>
           <tr>
@@ -68,41 +117,47 @@ $result = mysqli_query($conn, $query);
         </thead>
 
         <tbody>
-          <?php while ($row = mysqli_fetch_assoc($result)): ?>
+          <?php if (mysqli_num_rows($result) === 0): ?>
             <tr>
-              <td><?php echo htmlspecialchars($row["EOInumber"]); ?></td>
-              <td><?php echo htmlspecialchars($row["JobReferenceNumber"]); ?></td>
-              <td>
-                <?php echo htmlspecialchars($row["FirstName"] . " " . $row["LastName"]); ?>
-              </td>
-              <td><?php echo htmlspecialchars($row["EmailAddress"]); ?></td>
-              <td><?php echo htmlspecialchars($row["PhoneNumber"]); ?></td>
-              <td><?php echo htmlspecialchars($row["Skills"]); ?></td>
-
-              <td>
-                <form method="post" action="manage.php">
-                  <input type="hidden" name="eoi_number" value="<?php echo htmlspecialchars($row["EOInumber"]); ?>">
-
-                  <select name="status">
-                    <option value="New" <?php if ($row["Status"] === "New") echo "selected"; ?>>New</option>
-                    <option value="Current" <?php if ($row["Status"] === "Current") echo "selected"; ?>>Current</option>
-                    <option value="Final" <?php if ($row["Status"] === "Final") echo "selected"; ?>>Final</option>
-                  </select>
-              </td>
-
-              <td>
-                  <button type="submit" name="update_status">Update</button>
-                </form>
-              </td>
-
-              <td>
-                <form method="post" action="manage.php">
-                  <input type="hidden" name="eoi_number" value="<?php echo htmlspecialchars($row["EOInumber"]); ?>">
-                  <button type="submit" name="delete_eoi">Delete</button>
-                </form>
-              </td>
+              <td colspan="9" style="text-align: center; padding: 20px; color: #666;">No expressions of interest found matching your search.</td>
             </tr>
-          <?php endwhile; ?>
+          <?php else: ?>
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+              <tr>
+                <td>#<?php echo htmlspecialchars($row["EOInumber"]); ?></td>
+                <td><?php echo htmlspecialchars($row["JobReferenceNumber"]); ?></td>
+                <td>
+                  <?php echo htmlspecialchars($row["FirstName"] . " " . $row["LastName"]); ?>
+                </td>
+                <td><?php echo htmlspecialchars($row["EmailAddress"]); ?></td>
+                <td><?php echo htmlspecialchars($row["PhoneNumber"]); ?></td>
+                <td><?php echo htmlspecialchars($row["Skills"]); ?></td>
+
+                <td>
+                  <form method="post" action="manage.php">
+                    <input type="hidden" name="eoi_number" value="<?php echo htmlspecialchars($row["EOInumber"]); ?>">
+
+                    <select name="status">
+                      <option value="New" <?php if ($row["Status"] === "New") echo "selected"; ?>>New</option>
+                      <option value="Current" <?php if ($row["Status"] === "Current") echo "selected"; ?>>Current</option>
+                      <option value="Final" <?php if ($row["Status"] === "Final") echo "selected"; ?>>Final</option>
+                    </select>
+                </td>
+
+                <td>
+                    <button type="submit" name="update_status">Update</button>
+                  </form>
+                </td>
+
+                <td>
+                  <form method="post" action="manage.php" onsubmit="return confirm('Are you sure you want to delete this application permanently?');">
+                    <input type="hidden" name="eoi_number" value="<?php echo htmlspecialchars($row["EOInumber"]); ?>">
+                    <button type="submit" name="delete_eoi">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          <?php endif; ?>
         </tbody>
       </table>
     </main>
@@ -114,5 +169,6 @@ $result = mysqli_query($conn, $query);
 </html>
 
 <?php
+mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
