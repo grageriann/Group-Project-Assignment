@@ -8,14 +8,7 @@ $pageTitle = "About Us | G06 Creative Agency";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?></title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-      h2 {
-        color: #1a73e8;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 5px;
-      }
-    </style>
+    <link rel="stylesheet" href="styles/styles.css">
   </head>
 
   <body>
@@ -30,7 +23,7 @@ $pageTitle = "About Us | G06 Creative Agency";
       </nav>
     </header>
 
-    <main>
+    <main class="page-container">
       <section>
         <h2 style="font-size: 1.5rem">Acknowledgement of Country</h2>
         <p>
@@ -85,9 +78,7 @@ $pageTitle = "About Us | G06 Creative Agency";
       <section>
         <h2>Agency Facts</h2>
         <table>
-          <caption>
-            Team Credentials
-          </caption>
+          <caption>Team Credentials</caption>
           <thead>
             <tr>
               <th>Name</th>

@@ -18,14 +18,19 @@ if ($search !== "") {
   $query = "SELECT * FROM jobs ORDER BY id";
   $result = mysqli_query($conn, $query);
 }
+
+if (!$result) {
+  die("Query failed: " . mysqli_error($conn));
+}
 ?>
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs | G06 Creative Digital Media Agency</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
   </head>
 
   <body>
@@ -40,20 +45,25 @@ if ($search !== "") {
       </nav>
     </header>
 
-    <main class="jobs-container">
+    <main class="page-container jobs-container">
       <h1 style="text-align: center;">Current Career Opportunities</h1>
 
       <p style="text-align: center;">
         Join G06 Creative Digital Media Agency and help create engaging digital
         experiences for a wide range of clients.
       </p>
-      
-      <form method="get" action="jobs.php">
+
+      <form method="get" action="jobs.php" class="search-form">
         <label for="search">Search jobs:</label>
-        <input type="text" id="search" name="search">
+        <input
+          type="text"
+          id="search"
+          name="search"
+          value="<?php echo htmlspecialchars($search); ?>"
+        >
         <button type="submit">Search</button>
       </form>
-      
+
       <aside>
         <h2>Why Join G06?</h2>
         <p>
@@ -71,31 +81,40 @@ if ($search !== "") {
         </ul>
       </aside>
 
-      <?php while ($job = mysqli_fetch_assoc($result)): ?>
-        <section class="job-card">
-          <h2><?php echo htmlspecialchars($job["title"]); ?></h2>
+      <?php if (mysqli_num_rows($result) > 0): ?>
+        <?php while ($job = mysqli_fetch_assoc($result)): ?>
+          <section class="job-card">
+            <h2><?php echo htmlspecialchars($job["title"]); ?></h2>
 
-          <p>
-            Reference Number: <?php echo htmlspecialchars($job["reference_number"]); ?>
-          </p>
+            <p class="job-meta">
+              Reference Number: <?php echo htmlspecialchars($job["reference_number"]); ?>
+            </p>
 
-          <p>
-            <?php echo htmlspecialchars($job["description"]); ?>
-          </p>
+            <p>
+              <?php echo htmlspecialchars($job["description"]); ?>
+            </p>
 
-          <p>
-            <strong>Salary:</strong> <?php echo htmlspecialchars($job["salary"]); ?>
-          </p>
+            <p>
+              <strong>Salary:</strong> <?php echo htmlspecialchars($job["salary"]); ?>
+            </p>
 
-          <p>
-            <strong>Reports to:</strong> <?php echo htmlspecialchars($job["reports_to"]); ?>
-          </p>
-        </section>
-      <?php endwhile; ?>
+            <p>
+              <strong>Reports to:</strong> <?php echo htmlspecialchars($job["reports_to"]); ?>
+            </p>
+          </section>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <p>No jobs matched your search.</p>
+      <?php endif; ?>
     </main>
 
     <footer>
       <p>&copy; 2026 G06 Creative Digital Media Agency</p>
+      <p>
+        <a href="https://github.com/grageriann/Group-Project-Assignment/tree/main" target="_blank">GitHub Repository</a>
+        <a href="https://student-team-fnet57yj.atlassian.net/jira/software/projects/KAN/boards/2" target="_blank">Jira Project</a>
+        <a href="mailto:jacksonstremski@icloud.com">info@g06agency.com</a>
+      </p>
     </footer>
   </body>
 </html>
