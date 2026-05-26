@@ -1,8 +1,23 @@
 <?php
 require_once "settings.php";
 
-$query = "SELECT * FROM jobs ORDER BY id";
-$result = mysqli_query($conn, $query);
+$search = $_GET["search"] ?? "";
+
+if ($search !== "") {
+  $query = "SELECT * FROM jobs 
+            WHERE title LIKE ? 
+            OR description LIKE ? 
+            OR reference_number LIKE ?";
+
+  $stmt = mysqli_prepare($conn, $query);
+  $search_term = "%" . $search . "%";
+  mysqli_stmt_bind_param($stmt, "sss", $search_term, $search_term, $search_term);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+} else {
+  $query = "SELECT * FROM jobs ORDER BY id";
+  $result = mysqli_query($conn, $query);
+}
 ?>
 
 <!doctype html>
@@ -32,7 +47,13 @@ $result = mysqli_query($conn, $query);
         Join G06 Creative Digital Media Agency and help create engaging digital
         experiences for a wide range of clients.
       </p>
-
+      
+      <form method="get" action="jobs.php">
+        <label for="search">Search jobs:</label>
+        <input type="text" id="search" name="search">
+        <button type="submit">Search</button>
+      </form>
+      
       <aside>
         <h2>Why Join G06?</h2>
         <p>
