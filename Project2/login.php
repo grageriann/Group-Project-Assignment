@@ -11,22 +11,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($username) || empty($password)) {
         $error_msg = "Please enter both username and password.";
     } else {
-        $query = "SELECT * FROM users WHERE username = ?";
+        $query = "SELECT * FROM users WHERE username = ? AND password = ?";
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_bind_param($stmt, "ss", $username, $password);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
         if ($result && mysqli_num_rows($result) === 1) {
             $user = mysqli_fetch_assoc($result);
-            if (password_verify($password, $user["password"])) {
-                $_SESSION["loggedin"] = true;
-                $_SESSION["username"] = $user["username"];
-                header("Location: manage.php");
-                exit();
-            } else {
-                $error_msg = "Invalid username or password.";
-            }
+            $_SESSION["authenticated"] = true;
+            $_SESSION["manager_user"] = $user["username"];
+            header("Location: manage.php");
+            exit();
         } else {
             $error_msg = "Invalid username or password.";
         }
@@ -34,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         mysqli_stmt_close($stmt);
     }
 }
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
