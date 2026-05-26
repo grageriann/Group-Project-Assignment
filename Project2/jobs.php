@@ -1,13 +1,15 @@
 <?php
-$pageTitle = "Jobs | G06 Creative Digital Media Agency";
+require_once "settings.php";
+
+$query = "SELECT * FROM jobs ORDER BY id";
+$result = mysqli_query($conn, $query);
 ?>
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pageTitle; ?></title>
+    <title>Jobs | G06 Creative Digital Media Agency</title>
     <link rel="stylesheet" href="styles.css">
   </head>
 
@@ -25,6 +27,7 @@ $pageTitle = "Jobs | G06 Creative Digital Media Agency";
 
     <main class="jobs-container">
       <h1 style="text-align: center;">Current Career Opportunities</h1>
+
       <p style="text-align: center;">
         Join G06 Creative Digital Media Agency and help create engaging digital
         experiences for a wide range of clients.
@@ -37,6 +40,7 @@ $pageTitle = "Jobs | G06 Creative Digital Media Agency";
           Team members contribute to real-world projects and grow their technical and
           creative skills in a collaborative environment.
         </p>
+
         <h3>Employee Benefits</h3>
         <ul>
           <li>Creative team culture</li>
@@ -46,106 +50,35 @@ $pageTitle = "Jobs | G06 Creative Digital Media Agency";
         </ul>
       </aside>
 
-      <section class="job-card">
-        <h2>Front-End Developer</h2>
-        <p class="job-meta" id="front-end-developer">Reference Number: FE123</p>
-        <p>
-          We are looking for a Front-End Developer to build responsive and accessible
-          client websites. This role focuses on translating visual concepts into
-          functional webpages using HTML5 and CSS3.
-        </p>
+      <?php while ($job = mysqli_fetch_assoc($result)): ?>
+        <section class="job-card">
+          <h2><?php echo htmlspecialchars($job["title"]); ?></h2>
 
-        <section>
-          <h3>Position Summary</h3>
-          <p><strong>Salary:</strong> $68,000 – $80,000 per year</p>
-          <p><strong>Reports to:</strong> Lead Developer</p>
+          <p>
+            Reference Number: <?php echo htmlspecialchars($job["reference_number"]); ?>
+          </p>
+
+          <p>
+            <?php echo htmlspecialchars($job["description"]); ?>
+          </p>
+
+          <p>
+            <strong>Salary:</strong> <?php echo htmlspecialchars($job["salary"]); ?>
+          </p>
+
+          <p>
+            <strong>Reports to:</strong> <?php echo htmlspecialchars($job["reports_to"]); ?>
+          </p>
         </section>
-
-        <section>
-          <h3>Key Responsibilities</h3>
-          <ol>
-            <li>Develop responsive and user-friendly website layouts.</li>
-            <li>Implement accessible HTML5 and CSS3 solutions for client projects.</li>
-            <li>Work with designers to translate wireframes into polished interfaces.</li>
-            <li>Test webpages across browsers and screen sizes.</li>
-            <li>Maintain code quality and follow project timelines.</li>
-          </ol>
-        </section>
-
-        <section>
-          <h3>Essential Requirements</h3>
-          <ul>
-            <li>Strong knowledge of HTML5 and CSS3.</li>
-            <li>Understanding of responsive web design principles.</li>
-            <li>Ability to create accessible and semantic web content.</li>
-            <li>Good communication and teamwork skills.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Preferable Requirements</h3>
-          <ul>
-            <li>Experience with UI prototyping tools.</li>
-            <li>Knowledge of branding and visual consistency.</li>
-            <li>Previous project or portfolio experience.</li>
-          </ul>
-        </section>
-      </section>
-
-      <section class="job-card">
-        <h2>Web Designer</h2>
-        <p class="job-meta" id="web-designer">Reference Number: WD245</p>
-        <p>
-          We are seeking a creative Web Designer to produce visually engaging and
-          client-focused website designs. This role involves layout planning, visual
-          styling, and contributing to brand identity across digital platforms.
-        </p>
-
-        <section>
-          <h3>Position Summary</h3>
-          <p><strong>Salary:</strong> $65,000 – $76,000 per year</p>
-          <p><strong>Reports to:</strong> Creative Director</p>
-        </section>
-
-        <section>
-          <h3>Key Responsibilities</h3>
-          <ol>
-            <li>Create web page layouts that reflect client branding.</li>
-            <li>Design digital assets for websites and campaign materials.</li>
-            <li>Work collaboratively with developers and content designers.</li>
-            <li>Apply usability and accessibility principles to design decisions.</li>
-            <li>Support revisions based on client and team feedback.</li>
-          </ol>
-        </section>
-
-        <section>
-          <h3>Essential Requirements</h3>
-          <ul>
-            <li>Strong visual design and layout skills.</li>
-            <li>Understanding of colour, typography, and user experience.</li>
-            <li>Ability to communicate design ideas clearly.</li>
-            <li>Attention to detail and consistency.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Preferable Requirements</h3>
-          <ul>
-            <li>Experience using Figma, Adobe XD, or similar tools.</li>
-            <li>Basic knowledge of HTML and CSS.</li>
-            <li>Portfolio demonstrating creative digital work.</li>
-          </ul>
-        </section>
-      </section>
+      <?php endwhile; ?>
     </main>
 
     <footer>
       <p>&copy; 2026 G06 Creative Digital Media Agency</p>
-      <p>
-        <a href="https://github.com/grageriann/Group-Project-Assignment/tree/main" target="_blank">GitHub Repository</a>
-        <a href="https://student-team-fnet57yj.atlassian.net/jira/software/projects/KAN/boards/2" target="_blank">Jira Project</a>
-        <a href="mailto:jacksonstremski@icloud.com">info@g06agency.com</a>
-      </p>
     </footer>
   </body>
 </html>
+
+<?php
+mysqli_close($conn);
+?>
