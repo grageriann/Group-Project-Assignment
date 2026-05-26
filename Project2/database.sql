@@ -20,3 +20,30 @@ CREATE TABLE IF NOT EXISTS eoi (
   Status VARCHAR(20) DEFAULT 'New',
   DateSubmitted TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS jobs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  reference_number CHAR(5) NOT NULL,
+  title VARCHAR(100) NOT NULL,
+  description TEXT NOT NULL,
+  salary VARCHAR(100) NOT NULL,
+  reports_to VARCHAR(100) NOT NULL
+);
+
+INSERT INTO jobs 
+(reference_number, title, description, salary, reports_to)
+VALUES
+(
+  'FE123',
+  'Front-End Developer',
+  'We are looking for a Front-End Developer to build responsive and accessible client websites. This role focuses on translating visual concepts into functional webpages using HTML5 and CSS3.',
+  '$68,000 – $80,000 per year',
+  'Lead Developer'
+),
+(
+  'WD245',
+  'Web Designer',
+  'We are seeking a creative Web Designer to produce visually engaging and client-focused website designs. This role involves layout planning, visual styling, and contributing to brand identity across digital platforms.',
+  '$65,000 – $76,000 per year',
+  'Creative Director'
+);
