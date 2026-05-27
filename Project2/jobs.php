@@ -1,6 +1,6 @@
 <?php
 require_once "settings.php";
-require_once "header.inc"
+require_once "header.inc";
 
 $search = $_GET["search"] ?? "";
 
