@@ -1,30 +1,8 @@
-<?php
-$pageTitle = "About Us | G06 Creative Agency";
-?>
+<?php 
+$pageTitle = "Join the Team | G06 Agency";
+include_once("header.inc"); ?>
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pageTitle; ?></title>
-    <link rel="stylesheet" href="styles/styles.css">
-  </head>
-
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="jobs.php">Jobs</a></li>
-          <li><a href="apply.php">Apply</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="manage.php">Manage</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main class="page-container">
+    <main>
       <section>
         <h2 style="font-size: 1.5rem">Acknowledgement of Country</h2>
         <p>
@@ -38,7 +16,7 @@ $pageTitle = "About Us | G06 Creative Agency";
       <section>
         <h2>Agency Information</h2>
         <ul>
-          <li>Group Name: G06 – Creative Digital Media Agency</li>
+          <li>Group Name: G06 - Creative Digital Media Agency</li>
           <li>Specialization: Web Design, Branding, and Digital Content</li>
           <li>
             Course Info:

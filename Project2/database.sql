@@ -37,14 +37,14 @@ VALUES
   'FE123',
   'Front-End Developer',
   'We are looking for a Front-End Developer to build responsive and accessible client websites. This role focuses on translating visual concepts into functional webpages using HTML5 and CSS3.',
-  '$68,000 – $80,000 per year',
+  '$68,000 - $80,000 per year',
   'Lead Developer'
 ),
 (
   'WD245',
   'Web Designer',
   'We are seeking a creative Web Designer to produce visually engaging and client-focused website designs. This role involves layout planning, visual styling, and contributing to brand identity across digital platforms.',
-  '$65,000 – $76,000 per year',
+  '$65,000 - $76,000 per year',
   'Creative Director'
 );
 
