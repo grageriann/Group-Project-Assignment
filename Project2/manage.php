@@ -5,6 +5,7 @@ if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
     exit;
 }
 require_once "settings.php";
+include_once("header.inc");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   if (isset($_POST["update_status"])) {
@@ -59,27 +60,6 @@ if (!empty($params)) {
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 ?>
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Manage Applications</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="jobs.php">Jobs</a></li>
-          <li><a href="apply.php">Apply</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="manage.php">Manage</a></li>
-        </ul>
-      </nav>
-    </header>
 
     <main>
       <h1>Manage Job Applications</h1>
