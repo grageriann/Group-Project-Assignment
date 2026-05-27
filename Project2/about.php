@@ -81,13 +81,6 @@ include_once("header.inc"); ?>
       </section>
     </main>
 
-    <footer>
-      <p>
-        &copy; 2026 G06 Creative Agency |
-        <a href="https://student-team-fnet57yj.atlassian.net/jira/software/projects/KAN/boards/2?jql=">Jira</a> |
-        <a href="https://github.com/grageriann/Group-Project-Assignment">GitHub</a> |
-        <a href="mailto:info@g06agency.com">info@g06agency.com</a>
-      </p>
-    </footer>
-  </body>
-</html>
+<?php 
+include_once("footer.inc"); 
+?>
